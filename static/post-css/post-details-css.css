@@ -1,0 +1,114 @@
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        .post-container {
+            max-width: 600px;
+            margin: 20px auto;
+            border: 1px solid #dbdbdb;
+            background-color: #fff;
+            border-radius: 3px;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 14px;
+        }
+        .post-header img {
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            margin-right: 14px;
+        }
+        .post-header .username {
+            font-weight: 500;
+            color: #262626;
+            text-decoration: none;
+        }
+        .post-content img {
+            width: 100%;
+            display: block;
+        }
+        .post-actions {
+            display: flex;
+            align-items: center;
+            padding: 8px 9px;
+        } 
+        .post-actions svg {
+            cursor: pointer;
+        }
+        .post-likes,
+        .post-description,
+        .post-comments,
+        .post-date {
+            padding: 0 5px;
+        }
+        .post-description .username,
+        .post-comments .username {
+            font-weight: 500;
+            color: #262626;
+            margin-right: 5px;
+            text-decoration: none;
+        }
+        .post-description {
+            margin-bottom: 10px;
+        }
+        .post-date {
+            color: #8e8e8e;
+            font-size: 12px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .comment-section {
+            padding: 10px 14px;
+            border-top: 1px solid #efefef;
+            display: flex;
+            align-items: center;
+        }
+        .comment-section img {
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            margin-right: 14px;
+        }
+        .comment-section form {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .comment-section form input {
+            border: none;
+            flex-grow: 1;
+            font-size: 14px;
+        }
+        .comment-section form button {
+            border: none;
+            background: none;
+            color: #0095f6;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .comment-user-pic img {
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            margin-right: 10px; 
+        }
+        .post-comments {
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+       
+        .post__button--liked path {
+            fill: #ed4956; /* Instagram red color */
+            stroke: #ed4956;
+        }
+        
+        /* .post__button path {
+            transition: fill 0.3s, stroke 0.3s;
+        } */
+        
+        
+        
+        
+        

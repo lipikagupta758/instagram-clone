@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="George W. Park">
+    <meta name="description" content="This project demonstrates how CSS grid (with flexbox and float fallback) can be used to re-create the layout of an Instagram profile page.">
+
+    <!-- Title -->
+    <title>Instagram Profile Layout</title>
+
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets3/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'assets3/css/styles.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+
+</head>
+<body>
+    <header>
+        <br><br>
+
+        <div class="container">
+
+            <div class="profile">
+
+                <div class="profile-image">
+                    <img src="{{profile.image.url}}" alt="" style="width: 200px; height: 200px; object-fit: cover;">
+                </div>
+
+                <div class="profile-user-settings">
+                    {% if profile.first_name %}
+                        <h6 class="profile-user-name">{{profile.first_name| title}} &nbsp; </h6> 
+                    {% endif %}
+                    {% if profile.last_name %}
+                        <h6 class="profile-user-name">{{profile.last_name| title}}</h6>
+                    {% endif %} <br><br>
+                    <h5 style= "font-size: 15px;" class= "profile-user-name"> @{{profile.user.username}}</h5><br><br>
+                    {% if profile.user == request.user %}
+                        <a href= "{% url 'editProfile' profile.user %}" class="btn profile-edit-btn" style="text-decoration: none;">Edit Profile</a>
+                        <a style="text-decoration: none;" href="" class="btn profile-edit-btn">Logout</a>
+                        <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button><br>
+                    {% endif %}
+                     
+                    {% if profile.user != request.user %}
+                    {% if follow_status %}
+                    <a href="{% url 'follow' profile.user %}" class="btn profile-edit-btn" style="color: red;">Unfollow</a> <br><br>
+                    {% else %}
+                    <a href="{% url 'follow' profile.user %}" class="btn profile-edit-btn" style="color: green;">Follow</a> <br><br>
+                    {% endif %}
+                    <a href="" class="btn profile-edit-btn">Message</a> <br><br>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="profile-stats">
+                   <br><br>
+                    <ul>
+                        <li><span class="profile-stat-count">{{post_count}}</span> posts</li>
+                        <li><span class="profile-stat-count">{{followers_count}}</span> followers</li>
+                        <li><span class="profile-stat-count">{{following_count}}</span> following</li>
+                    </ul>
+                    <br>
+
+                </div>
+
+                <div class="profile-bio">
+                    {% if profile.bio %}
+                        <p><span class="profile-real-name">◉ {{profile.bio}}</p>
+                    {% endif%}
+                    {% if profile.location %}
+                        <p><span class="profile-real-location">◉ {{profile.location}}</p>
+                    {% endif%}
+                    {% if profile.url %}
+                        <p><span class="profile-real-url"><a href= "{{profile.url}}">◉ {{profile.url}}</a></p>
+                    {% endif %}
+                    <br>
+
+                    <div class= "profile-usert-settings">
+                    {%if url_name == 'profile' %}
+                        <a href= "{% url 'profile' profile.user %}" class= "btns profile-edit-btn" style="color: green;"> Posts </a>
+                    {% else %}
+                        <a href= "{% url 'profile' profile.user %}" class= "btns profile-edit-btn" style="color: black;"> Posts </a>
+                    {% endif %}
+
+                    {%if url_name == 'saved' %}
+                        <a href= "{% url 'saved' profile.user %}" class= "btns profile-edit-btn" style="color: green;"> Saved </a>
+                    {% else %} 
+                        <a href= "{% url 'saved' profile.user %}" class= "btns profile-edit-btn" style="color: black;"> Saved </a>
+                    {% endif %}
+                    </div>
+
+            </div>
+            <!-- End of profile section -->
+
+        </div>
+        <!-- End of container -->
+
+    </header>
+
+    <main>
+
+        <div class="container">
+
+            <div class="gallery">
+                {% for post in posts %}
+
+                <div class="gallery-item" tabindex="0">
+
+                    <a href= "{{post.get_absolute_url}}"> {% comment %} {% url 'post-details' post.id %}" > {% endcomment %}
+                        <img src="{{post.picture.url}}" class="gallery-image" alt="" style="width: 500px; height: 300px; object-fit: cover;">
+                    
+
+                    <div class="gallery-item-info">
+
+                        {% comment %} <ul>
+                            <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i>{{post.likes}}</li>
+                            <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+                        </ul> {% endcomment %}
+                    </div>
+                    </a>
+                </div> 
+                {% endfor %}
+            </div>
+            <!-- End of gallery -->
+
+            <div class="loader"></div>
+
+        </div>
+        <!-- End of container -->
+
+    </main>
+
+</body>
+</html>
+{% endblock content %}
